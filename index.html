@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Nyan Cat | Mouse Follower</title>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!this is the only part that has changed. i added the "http:" at the beginning of the link-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+            font-family: monospace;
+            color: white;
+        }
+        
+        .pic {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        
+        html {
+            background-image: url(nyan%20backround.png);
+        }
+        
+        div {
+            background-color: #FF3399;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loc">
+        <p>Your mouse is at: <span id="coor"></span>.
+            <br> Nyan Cat is <span id="not"></span> following you. <span id="clickMessage"> Click to make it stop.</span>
+        </p>
+    </div>
+    <img class="pic" src='nyan2.gif'>
+</body>
+<script>
+    $(document).ready(function () {
+        var canFollow = true;
+        $(document).mousemove(function (e) {
+            // Nyan cat will only follow if it's allowed to
+            if (canFollow) {
+                $(".pic").css({
+                    "top": e.clientY,
+                    "left": e.clientX
+                });
+            }
+            $("#coor").text("x: " + e.clientX + " , " + "y: " + e.clientY);
+        });
+
+        $(document).toggle(function () {
+            // This toggles the descriptive text
+            $('#not').text("not");
+            $("#clickMessage").text("How sad. Click to make it start again.");
+            canFollow = false;
+
+
+
+
+        }, function () {
+            $('#not').text(" ");
+            canFollow = true;
+            $("#clickMessage").text("Click to make it stop.");
+        });
+
+    });
+</script>
+
+</html>
